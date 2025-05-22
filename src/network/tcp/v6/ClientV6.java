@@ -1,16 +1,14 @@
-package network.tcp.v5;
+package network.tcp.v6;
 
 import java.io.DataInputStream;
-import java.io.DataOutput;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-import static network.tcp.SocketCloseUtil.closeAll;
 import static util.MyLogger.log;
 
-public class ClientV5 {
+public class ClientV6 {
 
     private static final int PORT = 12345;
 

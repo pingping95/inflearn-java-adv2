@@ -1,2 +1,4 @@
-package chat.client;public class ReadHandler {
+package chat.client;
+
+public class ReadHandler implements  {
 }

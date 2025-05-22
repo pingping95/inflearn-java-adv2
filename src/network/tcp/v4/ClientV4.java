@@ -1,4 +1,4 @@
-package network.tcp.v4.v3;
+package network.tcp.v4;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -9,7 +9,7 @@ import java.util.Scanner;
 import static network.tcp.SocketCloseUtil.closeAll;
 import static util.MyLogger.log;
 
-public class ClientV3 {
+public class ClientV4 {
 
     private static final int PORT = 12345;
 

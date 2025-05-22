@@ -5,21 +5,26 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import static network.tcp.SocketCloseUtil.closeAll;
 import static util.MyLogger.log;
 
-public class SessionV3 implements Runnable {
+public class SessionV4 implements Runnable {
 
     private final Socket socket;
 
-    public SessionV3(Socket socket) {
+    public SessionV4(Socket socket) {
         this.socket = socket;
     }
 
     @Override
     public void run() {
+        // finally 블록에서 변수에 접근해야 한다. 따라서 try 블록 안에서 선언할 수 없다.
+        DataInputStream input = null;
+        DataOutputStream output = null;
+
         try {
-            DataInputStream input = new DataInputStream(socket.getInputStream());
-            DataOutputStream output = new DataOutputStream(socket.getOutputStream());
+            input = new DataInputStream(socket.getInputStream());
+            output = new DataOutputStream(socket.getOutputStream());
 
             while(true) {
                 // Client로부터 문자 받기
@@ -35,14 +40,11 @@ public class SessionV3 implements Runnable {
                 output.writeUTF(toSend);
                 log("client <- server: " + toSend);
             }
-
-            // 자원 정리
-            log("연결 종료: " +socket);
-            input.close();
-            output.close();
-            socket.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            log("IOException : " + e);
+        } finally {
+            closeAll(socket, input, output);
+            log("연결 종료: " + socket);
         }
     }
 }
