@@ -30,4 +30,4 @@ bin/
 .idea
 
 # temp
-./temp
+temp/
